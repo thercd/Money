@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="field">
+        <label class="label" for="#{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+        <div class="control">
+            {% render_field form.nome class+="input" %}
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.valor.id_for_label }}">{{ form.valor.label }}</label>
+        <div class="control control has-icons-left has-icons-right">
+            {{ form.valor|add_class:"input"|add_error_class:"is-danger" }}
+            <span class="icon is-small is-left">
+                <i class="fas fa-dollar-sign"></i>
+            </span>
+            {% if form.valor.errors %}
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+             </span>
+                {% for error in form.valor.errors %}
+              <p class="help is-danger">{{ error|escape }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.dia_vencimento.id_for_label }}">{{ form.dia_vencimento.label }}</label>
+        <div class="control">
+            <div class="select">
+                {% render_field form.dia_vencimento %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.inicio.id_for_label }}">{{ form.inicio.label }}</label>
+        <div class="control">
+            {% render_field form.inicio class+="input" %}
+            </di
+
+            <div class="field">
+                <label class="label" for="#{{ form.termino.id_for_label }}">{{ form.termino.label }}</label>
+                <div class="control">
+                    {% render_field form.termino class+="input" %}
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox" for="#{{ form.periodica.id_for_label }}">
+                            {% render_field form.periodica %} {{ form.periodica.label }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control"> A divida se repete a cada
+                        <div class="select is-small">
+                            {% render_field form.meses_periodo %}
+                        </div>
+                        mês(es).
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox" for="#{{ form.repeticao_anual.id_for_label }}">
+                            {% render_field form.repeticao_anual %} {{ form.repeticao_anual.label }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="#{{ form.repeticao_anual.id_for_label }}">{{ form.termino.label }}</label>
+                    <div class="control">
+                        {% render_field form.termino class+="textarea" %}
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-link">Enviar</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-text">Cancelar</button>
+                    </div>
+                </div>
+</form>
+{% endblock %}
