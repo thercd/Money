@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Despesa
+from .models import Despesa, Conta
 from django.forms import widgets
 
 
@@ -8,10 +8,12 @@ class DespesaForm(ModelForm):
         model = Despesa
         fields = ['nome',
             'valor',
+            'categoria',
             'dia_vencimento',
             'inicio',
             'termino',
-            'tipo',
+            'cor',
+            'icone',
             'periodica',
             'meses_periodo',
             'repeticao_anual',
@@ -29,3 +31,13 @@ class DespesaForm(ModelForm):
         #     'dia_vencimento': widgets.Select(attrs={'class': 'select'}),
         #
         # }
+
+
+class ContaForm(ModelForm):
+    class Meta:
+        model = Conta
+        fields = ['despesa',
+                    'valor',
+                    'dia_vencimento',
+                    'referente',
+                    'observacao']

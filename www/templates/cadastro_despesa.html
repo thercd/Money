@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block content %}
+{% load staticfiles %}
+<script src="{% static 'js/cadastro_despesa.js' %}"></script>
+{% if form.errors %}
+<article class="message is-danger">
+    <div class="message-header">
+        <p>Danger</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        {{ form.errors }}
+    </div>
+</article>
+{% endif %}
 <form action="." method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -10,6 +23,29 @@
             {% render_field form.nome class+="input" %}
         </div>
     </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.categoria.id_for_label }}">{{ form.categoria.label }}</label>
+        <div class="control">
+                {% render_field form.categoria %}
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.cor.id_for_label }}">{{ form.cor.label }}</label>
+        <div class="control">
+                {% render_field form.cor %}
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.icone.id_for_label }}">{{ form.icone.label }}</label>
+        <div class="control">
+                {% render_field form.icone %}
+        </div>
+    </div>
+
+
 
     <div class="field">
         <label class="label" for="#{{ form.valor.id_for_label }}">{{ form.valor.label }}</label>
@@ -22,9 +58,9 @@
             <span class="icon is-small is-right">
                 <i class="fas fa-exclamation-triangle"></i>
              </span>
-                {% for error in form.valor.errors %}
-              <p class="help is-danger">{{ error|escape }}</p>
-                {% endfor %}
+            {% for error in form.valor.errors %}
+            <p class="help is-danger">{{ error|escape }}</p>
+            {% endfor %}
             {% endif %}
         </div>
     </div>
@@ -40,55 +76,72 @@
 
     <div class="field">
         <label class="label" for="#{{ form.inicio.id_for_label }}">{{ form.inicio.label }}</label>
-        <div class="control">
-            {% render_field form.inicio class+="input" %}
-            </di
+        <div class="control control has-icons-right">
+            {{ form.inicio|add_class:"input"|add_error_class:"is-danger" }}
+            {% if form.inicio.errors %}
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+             </span>
+            {% for error in form.inicio.errors %}
+            <p class="help is-danger">{{ error|escape }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
-            <div class="field">
-                <label class="label" for="#{{ form.termino.id_for_label }}">{{ form.termino.label }}</label>
-                <div class="control">
-                    {% render_field form.termino class+="input" %}
-                </div>
+    <div class="field">
+        <label class="label" for="#{{ form.termino.id_for_label }}">{{ form.termino.label }}</label>
+        <div class="control control has-icons-right">
+            {{ form.termino|add_class:"input"|add_error_class:"is-danger" }}
+            {% if form.termino.errors %}
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+             </span>
+            {% for error in form.termino.errors %}
+            <p class="help is-danger">{{ error|escape }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
 
-                <div class="field">
-                    <div class="control">
-                        <label class="checkbox" for="#{{ form.periodica.id_for_label }}">
-                            {% render_field form.periodica %} {{ form.periodica.label }}
-                        </label>
-                    </div>
-                </div>
+        <div class="field">
+            <div class="control">
+                <label class="checkbox" for="#{{ form.periodica.id_for_label }}">
+                    {% render_field form.periodica %} {{ form.periodica.label }}
+                </label>
+            </div>
+        </div>
 
-                <div class="field">
-                    <div class="control"> A divida se repete a cada
-                        <div class="select is-small">
-                            {% render_field form.meses_periodo %}
-                        </div>
-                        mês(es).
-                    </div>
+        <div class="field">
+            <div class="control"> A divida se repete a cada
+                <div class="select is-small">
+                    {% render_field form.meses_periodo %}
                 </div>
+                mês(es).
+            </div>
+        </div>
 
-                <div class="field">
-                    <div class="control">
-                        <label class="checkbox" for="#{{ form.repeticao_anual.id_for_label }}">
-                            {% render_field form.repeticao_anual %} {{ form.repeticao_anual.label }}
-                        </label>
-                    </div>
-                </div>
+        <div class="field">
+            <div class="control">
+                <label class="checkbox" for="#{{ form.repeticao_anual.id_for_label }}">
+                    {% render_field form.repeticao_anual %} {{ form.repeticao_anual.label }}
+                </label>
+            </div>
+        </div>
 
-                <div class="field">
-                    <label class="label" for="#{{ form.repeticao_anual.id_for_label }}">{{ form.termino.label }}</label>
-                    <div class="control">
-                        {% render_field form.termino class+="textarea" %}
-                    </div>
-                </div>
+        <div class="field">
+            <label class="label" for="#{{ form.observacao.id_for_label }}">{{ form.observacao.label }}</label>
+            <div class="control">
+                {% render_field form.observacao class+="textarea" %}
+            </div>
+        </div>
 
-                <div class="field is-grouped">
-                    <div class="control">
-                        <button type="submit" class="button is-link">Enviar</button>
-                    </div>
-                    <div class="control">
-                        <button class="button is-text">Cancelar</button>
-                    </div>
-                </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <button type="submit" class="button is-link">Enviar</button>
+            </div>
+            <div class="control">
+                <button class="button is-text">Cancelar</button>
+            </div>
+        </div>
 </form>
 {% endblock %}
