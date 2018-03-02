@@ -74,35 +74,6 @@
         </div>
     </div>
 
-    <div class="field">
-        <label class="label" for="#{{ form.inicio.id_for_label }}">{{ form.inicio.label }}</label>
-        <div class="control control has-icons-right">
-            {{ form.inicio|add_class:"input"|add_error_class:"is-danger" }}
-            {% if form.inicio.errors %}
-            <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-             </span>
-            {% for error in form.inicio.errors %}
-            <p class="help is-danger">{{ error|escape }}</p>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.termino.id_for_label }}">{{ form.termino.label }}</label>
-        <div class="control control has-icons-right">
-            {{ form.termino|add_class:"input"|add_error_class:"is-danger" }}
-            {% if form.termino.errors %}
-            <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-             </span>
-            {% for error in form.termino.errors %}
-            <p class="help is-danger">{{ error|escape }}</p>
-            {% endfor %}
-            {% endif %}
-        </div>
-
         <div class="field">
             <div class="control">
                 <label class="checkbox" for="#{{ form.periodica.id_for_label }}">
@@ -111,13 +82,33 @@
             </div>
         </div>
 
-        <div class="field">
-            <div class="control"> A divida se repete a cada
-                <div class="select is-small">
-                    {% render_field form.meses_periodo %}
-                </div>
-                mês(es).
-            </div>
+    <div class="field">
+        <label class="label" for="#{{ form.mes_inicio.id_for_label }}">{{ form.mes_inicio.label }}</label>
+        <div class="control control has-icons-right">
+            {{ form.mes_inicio|add_class:"input"|add_error_class:"is-danger" }}
+            {% if form.mes_inicio.errors %}
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+             </span>
+            {% for error in form.mes_inicio.errors %}
+            <p class="help is-danger">{{ error|escape }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label" for="#{{ form.mes_termino.id_for_label }}">{{ form.mes_termino.label }}</label>
+        <div class="control control has-icons-right">
+            {{ form.mes_termino|add_class:"input"|add_error_class:"is-danger" }}
+            {% if form.mes_termino.errors %}
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+             </span>
+            {% for error in form.mes_termino.errors %}
+            <p class="help is-danger">{{ error|escape }}</p>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="field">
