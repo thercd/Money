@@ -2,7 +2,6 @@
 {% block content %}
 {% load staticfiles %}
 <script type="text/javascript" src="{% static 'js/lista_contas.js' %}"></script>
-
 <table>
     <tr>
         <th>Nome</th>
@@ -11,15 +10,17 @@
         <th>referente</th>
         <th>paga</th>
         <th>data_pagamento</th>
+        <th>pagar conta</th>
     </tr>
     {% for conta in contas %}
-    <tr data-despesa="{% url 'listar_contas_depesa' conta.despesa.id %}" class="despesa">
-        <td>{{conta.despesa.nome}}</td>
+    <tr>
+        <td data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">{{conta.despesa.nome}}</td>
         <td>{{conta.valor}}</td>
         <td>{{conta.dia_vencimento}}</td>
         <td>{{conta.referente}}</td>
         <td>{{conta.paga}}</td>
         <td>{{conta.data_pagamento}}</td>
+        <td><input type="button" data-action="{% url 'pagar_conta' conta.despesa.id conta.id %}" class="action" value="pagar" ></td>
     </tr>
     {% endfor %}
 </table>
@@ -37,7 +38,7 @@
         <th>data_pagamento</th>
     </tr>
     {% for conta in proximas_contas %}
-    <tr data-despesa="{% url 'listar_contas_depesa' conta.despesa.id %}" class="despesa">
+    <tr data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">
         <td>{{conta.despesa.nome}}</td>
         <td>{{conta.valor}}</td>
         <td>{{conta.dia_vencimento}}</td>

@@ -13,7 +13,7 @@
     </div>
 </article>
 {% endif %}
-<form action="{% url 'cadastro_conta' despesa_id %}" method="post">
+<form action="{% url 'alteracao_contas' despesa_id %}" method="post">
     {% csrf_token %}
     {{ contas.management_form }}
     {% for conta in contas %}

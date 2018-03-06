@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/lista_contas.js' %}"></script>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>valor</th>
+        <th>dia_vencimento</th>
+        <th>referente</th>
+        <th>paga</th>
+        <th>data_pagamento</th>
+    </tr>
+    {% for conta in contas %}
+    <tr data-despesa="{% url 'listar_contas_depesa' conta.despesa.id %}" class="despesa">
+        <td>{{conta.despesa.nome}}</td>
+        <td>{{conta.valor}}</td>
+        <td>{{conta.dia_vencimento}}</td>
+        <td>{{conta.referente}}</td>
+        <td>{{conta.paga}}</td>
+        <td>{{conta.data_pagamento}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

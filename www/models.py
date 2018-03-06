@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+import datetime
 
 dias_vemcimento = [(i, i) for i in range(1, 31)]
 
@@ -19,7 +20,22 @@ class Despesa(models.Model):
     repeticao_anual = models.BooleanField(default=False)
     observacao = models.TextField(blank=True)
 
-    def criarConta(self, data_referencia):
+    def criar_contas(self):
+        MES_ATUAL = 1
+        vencimento_atual = datetime.date.today().replace(day=self.dia_vencimento)
+        meses_conta = range(self.mes_inicio, self.mes_termino + MES_ATUAL)
+        data_ultima_conta_ano = vencimento_atual.replace(month=meses_conta[-1])
+        ano_referencia = vencimento_atual.year
+        contas = []
+        if vencimento_atual > data_ultima_conta_ano:
+            ano_referencia = +1
+        for mes in meses_conta:
+            conta = self.criar_conta(datetime.date(ano_referencia, mes, self.dia_vencimento))
+            contas.append(conta)
+        return contas
+
+
+    def criar_conta(self, data_referencia):
         conta = Conta()
         conta.despesa = self
         conta.valor = self.valor
@@ -39,7 +55,16 @@ class Conta(models.Model):
     referente = models.DateField()
     paga = models.BooleanField(default=False)
     data_pagamento = models.DateField(null=True, blank=True)
+    data_alteracao_pagamento = models.DateTimeField(null=True, blank=True)
     observacao = models.TextField(blank=True)
+
+    def pagar(self):
+        self.paga = True
+        if self.data_alteracao_pagamento is None and self.despesa.repeticao_anual:
+           nova_conta = self.despesa.criar_conta(datetime.date(self.referente.year + 1, self.referente.month, self.referente.day))
+           nova_conta.save()
+        self.data_alteracao_pagamento = timezone.now()
+        self.save()
 
     def __str__(self):
         return 'Referencia :' + self.referente.strftime('%d/%m/%Y')

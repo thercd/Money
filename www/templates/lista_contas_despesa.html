@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/lista_contas.js' %}"></script>
+<a href="{% url 'alteracao_despesa' despesa %}">Editar</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>valor</th>
+        <th>dia_vencimento</th>
+        <th>referente</th>
+        <th>paga</th>
+        <th>data_pagamento</th>
+        <th>pagar conta</th>
+    </tr>
+    {% for conta in contas %}
+    <tr data-despesa="{% url 'listar_contas_depesa' conta.despesa.id %}" class="despesa">
+        <td>{{conta.despesa.nome}}</td>
+        <td>{{conta.valor}}</td>
+        <td>{{conta.dia_vencimento}}</td>
+        <td>{{conta.referente}}</td>
+        <td>{{conta.paga}}</td>
+        <td>{{conta.data_pagamento}}</td>
+        <td><input type="button" data-action="{% url 'pagar_conta' conta.despesa.id conta.id %}" class="action" value="pagar" ></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
