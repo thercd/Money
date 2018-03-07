@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 import datetime
 
 dias_vemcimento = [(i, i) for i in range(1, 31)]
@@ -19,6 +20,7 @@ class Despesa(models.Model):
     periodica = models.BooleanField(default=False)
     repeticao_anual = models.BooleanField(default=False)
     observacao = models.TextField(blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def criar_contas(self):
         MES_ATUAL = 1
@@ -33,7 +35,6 @@ class Despesa(models.Model):
             conta = self.criar_conta(datetime.date(ano_referencia, mes, self.dia_vencimento))
             contas.append(conta)
         return contas
-
 
     def criar_conta(self, data_referencia):
         conta = Conta()

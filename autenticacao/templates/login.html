@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% load staticfiles %}
+<script src="{% static 'js/cadastro_despesa.js' %}"></script>
+{% if form.errors %}
+<article class="message is-danger">
+    <div class="message-header">
+        <p>Danger</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        {{ form.errors }}
+    </div>
+</article>
+{% endif %}
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="Entrar">
+</form>
+{% endblock %}
