@@ -47,7 +47,7 @@ def cadastro_conta(request,despesa_id):
                 else:
                     return render(request, 'parametrizar_contas.html', {'contas': formset, 'despesa_id': despesa_id})
             else:
-                contas = despesa.criar_contas()
+                contas = despesa.criar_contas(datetime.date.today())
                 contas_json = []
                 for conta in contas:
                     contas_json.append(model_to_dict(conta))
@@ -106,7 +106,7 @@ def alteracao_contas(request, despesa_id):
                 return render(request, 'alterar_parametrizacao_contas.html', {'contas': formset, 'despesa_id': despesa_id})
             pass
         else:
-            contas = despesa.criar_contas()
+            contas = despesa.criar_contas(datetime.date.today())
             ContaFormSet = modelformset_factory(Conta, form=ContaForm, extra=len(contas))
             contas_json = []
             for conta in contas:

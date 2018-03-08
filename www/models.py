@@ -22,9 +22,9 @@ class Despesa(models.Model):
     observacao = models.TextField(blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
-    def criar_contas(self):
+    def criar_contas(self, data_referencia):
         MES_ATUAL = 1
-        vencimento_atual = datetime.date.today().replace(day=self.dia_vencimento)
+        vencimento_atual = data_referencia.replace(day=self.dia_vencimento)
         meses_conta = range(self.mes_inicio, self.mes_termino + MES_ATUAL)
         data_ultima_conta_ano = vencimento_atual.replace(month=meses_conta[-1])
         ano_referencia = vencimento_atual.year
