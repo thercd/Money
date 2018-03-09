@@ -57,9 +57,11 @@ class ContaForm(ModelForm):
                 'observacao']
     def clean(self):
         paga = self.cleaned_data.get('paga', False)
-        if paga:
-            data_pagamento = self.cleaned_data.get('data_pagamento', None)
-            if data_pagamento in EMPTY_VALUES:
+        data_pagamento = self.cleaned_data.get('data_pagamento', None)
+        if data_pagamento in EMPTY_VALUES and paga:
                 self._errors['data_pagamento'] = self.error_class([
                     'Caso a divida estiver paga é necessario informar a data de pagamento '])
+        elif data_pagamento not in EMPTY_VALUES and not paga:
+            self._errors['data_pagamento'] = self.error_class([
+                'A conta nao está marcada como paga'])
         return self.cleaned_data

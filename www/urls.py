@@ -11,6 +11,4 @@ urlpatterns = [
     path('despesa/<int:despesa_id>/conta/<int:conta_id>/pagar/', views.pagar_conta, name='pagar_conta'),
     path('despesa/<int:despesa_id>/contas/cadastro/sucesso/', views.contas_cadastradas_sucesso, name='contas_cadastradas_sucesso'),
     path('despesa/<int:despesa_id>/alteracao/', views.alteracao_despesa, name='alteracao_despesa'),
-    path('despesa/<int:despesa_id>/contas/alteracao', views.alteracao_contas, name='alteracao_contas'),
-
 ]

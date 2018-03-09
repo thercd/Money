@@ -6,6 +6,7 @@ from django.forms import modelformset_factory
 from .forms import DespesaForm, ContaForm
 from .models import Despesa, Conta
 import datetime
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 
@@ -32,7 +33,7 @@ def cadastro_conta(request,despesa_id):
     try:
         despesa = Despesa.objects.get(id=despesa_id, usuario=request.user)
         contas = Conta.objects.filter(despesa=despesa_id)
-        if contas:
+        if not despesa.pendente_cadastro_conta:
             return HttpResponse('A despesa já possui as contas cadastradas')
         else:
             ContaFormSet = modelformset_factory(Conta, form=ContaForm, extra=12)
@@ -43,7 +44,8 @@ def cadastro_conta(request,despesa_id):
                         conta = contaForm.save(commit=False)
                         conta.despesa = despesa
                         conta.save()
-                    redirect(reverse('contas_cadastradas_sucesso', args=[despesa.id]))
+                    despesa.pendente_cadastro_conta = False
+                    return redirect(reverse('contas_cadastradas_sucesso', args=[despesa.id]))
                 else:
                     return render(request, 'parametrizar_contas.html', {'contas': formset, 'despesa_id': despesa_id})
             else:
@@ -60,7 +62,7 @@ def cadastro_conta(request,despesa_id):
 @login_required
 def contas_cadastradas_sucesso(request, despesa_id):
     contas = Conta.objects.filter(despesa=despesa_id, despesa__usuario=request.user)
-    if contas :
+    if contas:
         return render(request, 'contas_cadastradas_sucesso.html', {'contas': contas})
     else:
         return HttpResponse('Operaçao nao disponivel')
@@ -74,8 +76,9 @@ def alteracao_despesa(request, despesa_id):
             form = DespesaForm(request.POST, instance=despesa)
             if form.has_changed():
                 if form.is_valid():
+                    despesa.pendente_cadastro_conta = True
                     despesa.save()
-                    return redirect(reverse('alteracao_contas', args=[despesa.id]))
+                    return redirect(reverse('cadastro_conta', args=[despesa.id]))
                 else:
                     return HttpResponse('formulario invalido')
             else:
@@ -86,37 +89,6 @@ def alteracao_despesa(request, despesa_id):
     except Despesa.DoesNotExist:
         return HttpResponse('Operaçao nao disponivel')
 
-
-@login_required
-def alteracao_contas(request, despesa_id):
-    try:
-        despesa = Despesa.objects.get(id=despesa_id, usuario=request.user)
-        data_vencimento_mes_atual = datetime.date.today().replace(day=despesa.dia_vencimento)
-        if request.method == 'POST':
-            ContaFormSet = modelformset_factory(Conta, form=ContaForm)
-            formset = ContaFormSet(request.POST)
-            if formset.is_valid():
-                Conta.objects.filter(despesa=despesa.id, paga=False, referente__gte=data_vencimento_mes_atual).delete()
-                for contaForm in formset:
-                    conta = contaForm.save(commit=False)
-                    conta.despesa = despesa
-                    conta.save()
-                return redirect(reverse('contas_cadastradas_sucesso', args=[despesa.id]))
-            else:
-                return render(request, 'alterar_parametrizacao_contas.html', {'contas': formset, 'despesa_id': despesa_id})
-            pass
-        else:
-            contas = despesa.criar_contas(datetime.date.today())
-            ContaFormSet = modelformset_factory(Conta, form=ContaForm, extra=len(contas))
-            contas_json = []
-            for conta in contas:
-                if conta.referente < data_vencimento_mes_atual:
-                    conta.referente = conta.referente.replace(year=conta.referente.year + 1)
-                contas_json.append(model_to_dict(conta))
-            formset = ContaFormSet(initial=sorted(contas_json, key= lambda x: x['referente']), queryset=Conta.objects.none())
-            return render(request, 'alterar_parametrizacao_contas.html', {'contas': formset, 'despesa_id': despesa_id})
-    except Despesa.DoesNotExist:
-        return HttpResponse('Operaçao nao disponivel')
 
 @login_required
 def listar_contas(request):
@@ -134,15 +106,24 @@ def listar_contas_depesa(request, despesa_id):
 
 
 @login_required
-def pagar_conta(request,despesa_id,conta_id):
+def pagar_conta(request, despesa_id, conta_id):
     try:
-        conta = Conta.objects.get(id=conta_id, despesa__usuario=request.user)
-        conta.pagar()
+        despesa = Despesa.objects.get(id=despesa_id, usuario=request.user)
+        conta = Conta.objects.get(id=conta_id, despesa__id=despesa_id)
+        conta.paga = not conta.paga
+        if conta.data_alteracao_pagamento is None and despesa.repeticao_anual:
+            nova_conta = despesa.criar_conta(
+                datetime.date(conta.referente.year + 1, conta.referente.month, conta.referente.day))
+            nova_conta.save()
+        conta.data_alteracao_pagamento = timezone.now()
+        conta.save()
         ultima_pagina = request.META.get('HTTP_REFERER', None)
         if ultima_pagina is not None:
             return HttpResponseRedirect(ultima_pagina)
         else:
             return redirect(reverse('index'))
     except Despesa.DoesNotExist:
+        return HttpResponse('Operaçao nao disponivel')
+    except Conta.DoesNotExist:
         return HttpResponse('Operaçao nao disponivel')
 
