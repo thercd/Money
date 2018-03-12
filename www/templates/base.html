@@ -5,82 +5,47 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hero - Free Bulma template</title>
-    <!-- Bulma Version 0.6.0 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'hero.css' %}">
-    <link rel="stylesheet" href="{% static 'bulma/bulma.css' %}">
+    <title>Titulo</title>
+    <link rel="stylesheet" href="{% static 'semantic/semantic.min.css' %}">
+    <script defer src="{% static 'semantic/semantic.min.js' %}"></script>
+    <script defer src="{% static 'js/base.js' %}"></script>
     <script defer src="{% static 'fontawesome/fontawesome-all.min.js' %}"></script>
     <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
 </head>
 <body>
-
-<section class="hero is-info is-medium is-bold">
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="../">
-                    </a>
-                    <span class="navbar-burger burger" data-target="navbarMenu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-                </div>
-                <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-end">
-                        <a href="{% url 'index'%}" class="navbar-item is-active">
-                            Home
-                        </a>
-                        <a href="{% url 'cadastro_despesa'%}" class="navbar-item is-active">
-                            Cadastrar Despesa
-                        </a>
-
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'logout'%}" class="navbar-item is-active">
-                            logout
-                        </a>
-                        {% else %}
-                        <a href="{% url 'login'%}" class="navbar-item is-active">
-                            login
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-</section>
-<section class="container">
-    <div class="columns features">
-        <div class="column is-4">
-            <div class="card">
-                <div class="card-content">
-                    <div class="content">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
-                </div>
+<div class="ui large top menu">
+    <a class="active item">
+        Home
+    </a>
+    <a class="item">
+        Messages
+    </a>
+    <div class="right menu">
+        <div class="ui dropdown item">
+                Despesas<i class="dropdown icon"></i>
+            <div class="menu">
+                <a href="{% url 'index'%}" class="item">Listar</a>
+                <a href="{% url 'cadastro_despesa'%}" class="item">Incluir</a>
             </div>
         </div>
-    </div>
-    </div>
-</section>
-<footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Bulma Templates</strong> by <a href="https://github.com/dansup">Daniel Supernault</a>. The
-                source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-            </p>
-            <p>
-                <a class="icon" href="https://github.com/dansup/bulma-templates">
-                    <i class="fa fa-github"></i>
-                </a>
-            </p>
+        <div class="item">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}" class="navbar-item is-active">
+                <div class="ui primary button">
+                    logout
+                </div>
+            </a>
+            {% else %}
+            <a href="{% url 'login'%}" class="navbar-item is-active">
+                <div class="ui primary button">
+                    login
+                </div>
+            </a>
+            {% endif %}
         </div>
     </div>
-</footer>
+</div>
+{% block content %}
+{% endblock %}
 </body>
 </html>

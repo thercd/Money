@@ -3,136 +3,78 @@
 {% block content %}
 {% load staticfiles %}
 <script src="{% static 'js/cadastro_despesa.js' %}"></script>
-{% if form.errors %}
-<article class="message is-danger">
-    <div class="message-header">
-        <p>Danger</p>
-        <button class="delete" aria-label="delete"></button>
-    </div>
-    <div class="message-body">
-        {{ form.errors }}
-    </div>
-</article>
-{% endif %}
-<form action="." method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="field">
-        <label class="label" for="#{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
-        <div class="control">
-            {% render_field form.nome class+="input" %}
+<div class="ui main text container">
+    <h2 class="ui header">Cadastro de Despesa</h2>
+    {% if form.errors %}
+        <div class="ui error message">
+            <div class="header">Erro ao cadastrar despesa</div>
+                {{form.errors}}
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.categoria.id_for_label }}">{{ form.categoria.label }}</label>
-        <div class="control">
-                {% render_field form.categoria %}
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.cor.id_for_label }}">{{ form.cor.label }}</label>
-        <div class="control">
-                {% render_field form.cor %}
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.icone.id_for_label }}">{{ form.icone.label }}</label>
-        <div class="control">
-                {% render_field form.icone %}
-        </div>
-    </div>
-
-
-
-    <div class="field">
-        <label class="label" for="#{{ form.valor.id_for_label }}">{{ form.valor.label }}</label>
-        <div class="control control has-icons-left has-icons-right">
-            {{ form.valor|add_class:"input"|add_error_class:"is-danger" }}
-            <span class="icon is-small is-left">
-                <i class="fas fa-dollar-sign"></i>
-            </span>
-            {% if form.valor.errors %}
-            <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-             </span>
-            {% for error in form.valor.errors %}
-            <p class="help is-danger">{{ error|escape }}</p>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.dia_vencimento.id_for_label }}">{{ form.dia_vencimento.label }}</label>
-        <div class="control">
-            <div class="select">
-                {% render_field form.dia_vencimento %}
+    {% endif %}
+    <form action="." method="post" class="ui form">
+        {% csrf_token %}
+        <h4 class="ui dividing header">Informações da Despesa</h4>
+        <div class="two fields">
+            <div class="field {% if form.nome.errors %} error {% endif %}">
+                <label>{{ form.nome.label }}</label>
+                {{ form.nome|attr:"placeholder:Nome da Despesa" }}
             </div>
-        </div>
-    </div>
-
-        <div class="field">
-            <div class="control">
-                <label class="checkbox" for="#{{ form.periodica.id_for_label }}">
-                    {% render_field form.periodica %} {{ form.periodica.label }}
-                </label>
+            <div class="field {% if form.valor.errors %} error {% endif %}">
+                <label>{{ form.valor.label }}</label>
+                {{ form.valor|attr:"placeholder:Valor da Despesa" }}
             </div>
         </div>
 
-    <div class="field">
-        <label class="label" for="#{{ form.mes_inicio.id_for_label }}">{{ form.mes_inicio.label }}</label>
-        <div class="control control has-icons-right">
-            {{ form.mes_inicio|add_class:"input"|add_error_class:"is-danger" }}
-            {% if form.mes_inicio.errors %}
-            <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-             </span>
-            {% for error in form.mes_inicio.errors %}
-            <p class="help is-danger">{{ error|escape }}</p>
-            {% endfor %}
-            {% endif %}
+        <div class="four fields">
+            <div class="field {% if form.dia_vencimento.errors %} error {% endif %}">
+                <label>{{ form.dia_vencimento.label }}</label>
+                {{ form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown"  }}
+            </div>
+            <div class="field {% if form.periodica.errors %} error {% endif %} ">
+                <label>Despesa</label>
+                <div id="div-periodica" class="ui toggle checkbox">
+                    <label for="{{ form.periodica.id_for_label }}">{{ form.periodica.label }}</label>
+                    {{ form.periodica|add_class:"hidden"|attr:"tabindex:0" }}
+                    </label>
+                </div>
+            </div>
+            <div class="field periodos disabled {% if form.mes_inicio.errors %} error {% endif %}">
+                <label>{{ form.mes_inicio.label }}</label>
+                {{ form.mes_inicio|add_class:"ui fluid search dropdown" }}
+            </div>
+            <div class="field periodos disabled {% if form.mes_termino.errors %} error {% endif %}">
+                <label>{{ form.mes_termino.label }}</label>
+                {{ form.mes_termino|add_class:"ui fluid search dropdown" }}
+            </div>
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label" for="#{{ form.mes_termino.id_for_label }}">{{ form.mes_termino.label }}</label>
-        <div class="control control has-icons-right">
-            {{ form.mes_termino|add_class:"input"|add_error_class:"is-danger" }}
-            {% if form.mes_termino.errors %}
-            <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-             </span>
-            {% for error in form.mes_termino.errors %}
-            <p class="help is-danger">{{ error|escape }}</p>
-            {% endfor %}
-            {% endif %}
+        <div class="two fields">
+            <div class="field {% if form.categoria.errors %} error {% endif %}">
+                <label>{{ form.categoria.label }}</label>
+                {{ form.categoria|attr:"placeholder:Categoria" }}
+            </div>
+            <div class="field {% if form.cor.errors %} error {% endif %}">
+                <label>{{ form.cor.label }}</label>
+                {{ form.cor|attr:"placeholder:Cor" }}
+            </div>
         </div>
-
-        <div class="field">
-            <div class="control">
-                <label class="checkbox" for="#{{ form.repeticao_anual.id_for_label }}">
-                    {% render_field form.repeticao_anual %} {{ form.repeticao_anual.label }}
-                </label>
+        <div class="ui segment">
+            <div class="field {% if form.repeticao_anual.errors %} error {% endif %}">
+                <div id="box-rep-anual" class="ui toggle checkbox">
+                    {{ form.repeticao_anual|add_class:"hidden"|attr:"tabindex:0" }}
+                    <label>{{ form.repeticao_anual.label }}</label>
+                </div>
             </div>
         </div>
 
-        <div class="field">
-            <label class="label" for="#{{ form.observacao.id_for_label }}">{{ form.observacao.label }}</label>
-            <div class="control">
-                {% render_field form.observacao class+="textarea" %}
-            </div>
+        <div class="field {% if form.observacao.errors %} error {% endif %}">
+            <label>{{ form.observacao.label }}</label>
+            {{ form.observacao|attr:"placeholder:Observação"|attr:"rows:5" }}
         </div>
-
-        <div class="field is-grouped">
-            <div class="control">
-                <button type="submit" class="button is-link">Enviar</button>
-            </div>
-            <div class="control">
-                <button class="button is-text">Cancelar</button>
-            </div>
-        </div>
-</form>
-{% endblock %}
+        <button type="reset" class="ui button">
+            Limpar
+        </button>
+        <button type="submit" class="ui positive  button">
+            Salvar
+        </button>
+    </form>
+    {% endblock %}

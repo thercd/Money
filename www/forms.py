@@ -6,6 +6,35 @@ from django.core.validators import EMPTY_VALUES
 
 class DespesaForm(ModelForm):
     class Meta:
+        JANEIRO_NOVEMBRO = (
+            ('', 'Mes'),
+            ('1', 'Janeiro'),
+            ('2', 'Fevereiro'),
+            ('3', 'Março'),
+            ('4', 'Abril'),
+            ('5', 'Maio'),
+            ('6', 'Junho'),
+            ('7', 'Julho'),
+            ('8', 'Agosto'),
+            ('9', 'Setembro'),
+            ('10', 'Outubro'),
+            ('11', 'Novembro'),
+        )
+
+        FEVEREIRO_DEZEMBRO = (
+            ('', 'Mes'),
+            ('2', 'Fevereiro'),
+            ('3', 'Março'),
+            ('4', 'Abril'),
+            ('5', 'Maio'),
+            ('6', 'Junho'),
+            ('7', 'Julho'),
+            ('8', 'Agosto'),
+            ('9', 'Setembro'),
+            ('10', 'Outubro'),
+            ('11', 'Novembro'),
+            ('12', 'Dezembro'),
+        )
         model = Despesa
         fields = ['nome',
             'valor',
@@ -25,24 +54,32 @@ class DespesaForm(ModelForm):
         #         'min_value': 'A quantidade de mêses não pode ser menor que %(limit_value)s',
         #     },
         # }
-        # widgets = {
-        #     'nome': widgets.TextInput(attrs={'class': 'input'}),
-        #     'valor': widgets.NumberInput(attrs={'class': 'input'}),
-        #     'dia_vencimento': widgets.Select(attrs={'class': 'select'}),
-        #
-        # }
+        widgets = {
+            # 'nome': widgets.TextInput(attrs={'class': 'input'}),
+            # 'valor': widgets.NumberInput(attrs={'class': 'input'}),
+            'mes_inicio': widgets.Select(choices=JANEIRO_NOVEMBRO),
+            'mes_termino': widgets.Select(choices=FEVEREIRO_DEZEMBRO),
+        }
 
     def clean(self):
         periodica = self.cleaned_data.get('periodica', False)
         if periodica:
             mes_inicio = self.cleaned_data.get('mes_inicio', None)
+            mes_termino = self.cleaned_data.get('mes_termino', None)
             if mes_inicio in EMPTY_VALUES:
                 self._errors['mes_inicio'] = self.error_class([
                     'O Mes de inicio é necessario quando a divida é periodica'])
-            mes_termino = self.cleaned_data.get('mes_termino', None)
-            if mes_termino in EMPTY_VALUES:
+            elif mes_termino in EMPTY_VALUES:
                 self._errors['mes_termino'] = self.error_class([
                     'O Mes de termino é necessario quando a divida é periodica'])
+            elif mes_inicio > mes_termino:
+                self._errors['mes_inicio'] = self.error_class([
+                    'O Mes de inicio deve ser menor que o termino'])
+                self._errors['mes_termino'] = self.error_class([
+                    'O Mes de termino deve ser maior que o inicio'])
+        else:
+            self.cleaned_data['mes_inicio'] = ''
+            self.cleaned_data['mes_termino'] = ''
         return self.cleaned_data
 
 
