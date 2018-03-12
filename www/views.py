@@ -33,7 +33,7 @@ def cadastro_conta(request,despesa_id):
     try:
         despesa = Despesa.objects.get(id=despesa_id, usuario=request.user)
         contas = Conta.objects.filter(despesa=despesa_id)
-        if not despesa.pendente_cadastro_conta:
+        if contas:
             return HttpResponse('A despesa já possui as contas cadastradas')
         else:
             ContaFormSet = modelformset_factory(Conta, form=ContaForm, extra=12)
@@ -44,7 +44,6 @@ def cadastro_conta(request,despesa_id):
                         conta = contaForm.save(commit=False)
                         conta.despesa = despesa
                         conta.save()
-                    despesa.pendente_cadastro_conta = False
                     return redirect(reverse('contas_cadastradas_sucesso', args=[despesa.id]))
                 else:
                     return render(request, 'parametrizar_contas.html', {'contas': formset, 'despesa_id': despesa_id})
@@ -76,7 +75,6 @@ def alteracao_despesa(request, despesa_id):
             form = DespesaForm(request.POST, instance=despesa)
             if form.has_changed():
                 if form.is_valid():
-                    despesa.pendente_cadastro_conta = True
                     despesa.save()
                     return redirect(reverse('cadastro_conta', args=[despesa.id]))
                 else:

@@ -10,7 +10,7 @@ class Despesa(models.Model):
     nome = models.CharField(max_length=40)
     valor = models.DecimalField(max_digits=12, decimal_places=2, validators=[MinValueValidator(0)])
     dia_vencimento = models.PositiveIntegerField(choices=dias_vemcimento)
-    mes_inicio = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(12)])
+    mes_inicio = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(11)])
     mes_termino = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
     cor = models.CharField(max_length=10, blank=True)
     icone = models.CharField(max_length=15, blank=True)
@@ -20,7 +20,6 @@ class Despesa(models.Model):
     repeticao_anual = models.BooleanField(default=False)
     observacao = models.TextField(blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    pendente_cadastro_conta = models.BooleanField(default=True)
 
     def criar_contas(self, data_referencia):
         MES_ATUAL = 1

@@ -2,23 +2,47 @@
 {% load widget_tweaks %}
 {% block content %}
 {% load staticfiles %}
-{% if form.errors %}
-<article class="message is-danger">
-    <div class="message-header">
-        <p>Danger</p>
-        <button class="delete" aria-label="delete"></button>
+<div class="ui main text container">
+    <h2 class="ui header">Cadastro de Contas</h2>
+    {% if form.errors %}
+    <div class="ui error message">
+        <div class="header">Erro ao cadastrar despesa</div>
+        {{form.errors}}
     </div>
-    <div class="message-body">
-        {{ form.errors }}
-    </div>
-</article>
-{% endif %}
-<form action="{% url 'cadastro_conta' despesa_id %}" method="post">
-    {% csrf_token %}
-    {{ contas.management_form }}
-    {% for conta in contas %}
-        {{conta.as_p}}
-    {% endfor %}
-    <input type="submit" value="Enviar"/>
-</form>
+    {% endif %}
+    <form action="{% url 'cadastro_conta' despesa_id %}" method="post">
+        <div class="ui form">
+            {% csrf_token %}
+            {{ contas.management_form }}
+            {% for conta in contas %}
+            <div class="five fields">
+                <div class="field {% if conta.referente.errors %} error {% endif %}">
+                    <label>{{ conta.referente.label }}</label>
+                    {{ conta.referente|attr:"placeholder:Referente" }}
+                </div>
+                <div class="field {% if conta.valor.errors %} error {% endif %}">
+                    <label>{{ conta.valor.label }}</label>
+                    {{ conta.valor|attr:"placeholder:Valor da Conta" }}
+                </div>
+                <div class="field {% if conta.dia_vencimento.errors %} error {% endif %}">
+                    <label>{{ conta.dia_vencimento.label }}</label>
+                    {{ conta.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown" }}
+                </div>
+                <div class="two wide field {% if conta.paga.errors %} error {% endif %}">
+                    <label>{{ conta.paga.label }}</label>
+                    <div id="box-rep-anual" class="ui toggle fitted checkbox">
+                        {{ conta.paga|add_class:"hidden"|attr:"tabindex:0" }}
+                        <label></label>
+                    </div>
+                </div>
+                <div class="field {% if conta.data_pagamento.errors %} error {% endif %}">
+                    <label>{{ conta.data_pagamento.label }}</label>
+                    {{ conta.data_pagamento|attr:"placeholder:Data de Pagamento"|add_class:"ui fluid search dropdown" }}
+                </div>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Enviar"/>
+        </div>
+    </form>
+</div>
 {% endblock %}

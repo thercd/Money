@@ -15,18 +15,18 @@
         {% csrf_token %}
         <h4 class="ui dividing header">Informações da Despesa</h4>
         <div class="two fields">
-            <div class="field {% if form.nome.errors %} error {% endif %}">
+            <div class="field required {% if form.nome.errors %} error {% endif %}">
                 <label>{{ form.nome.label }}</label>
                 {{ form.nome|attr:"placeholder:Nome da Despesa" }}
             </div>
-            <div class="field {% if form.valor.errors %} error {% endif %}">
+            <div class="field required {% if form.valor.errors %} error {% endif %}">
                 <label>{{ form.valor.label }}</label>
                 {{ form.valor|attr:"placeholder:Valor da Despesa" }}
             </div>
         </div>
 
         <div class="four fields">
-            <div class="field {% if form.dia_vencimento.errors %} error {% endif %}">
+            <div class="field required {% if form.dia_vencimento.errors %} error {% endif %}">
                 <label>{{ form.dia_vencimento.label }}</label>
                 {{ form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown"  }}
             </div>
