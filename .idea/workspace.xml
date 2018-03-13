@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c1acf40-13d5-476e-a095-5ec0c540154c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Money/settings.py" afterPath="$PROJECT_DIR$/Money/settings.py" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change beforePath="$PROJECT_DIR$/www/models.py" afterPath="$PROJECT_DIR$/www/models.py" />
-      <change beforePath="$PROJECT_DIR$/www/static/js/cadastro_despesa.js" afterPath="$PROJECT_DIR$/www/static/js/cadastro_despesa.js" />
-      <change beforePath="$PROJECT_DIR$/www/templates/cadastro_despesa.html" afterPath="$PROJECT_DIR$/www/templates/cadastro_despesa.html" />
+      <change beforePath="$PROJECT_DIR$/www/forms.py" afterPath="$PROJECT_DIR$/www/forms.py" />
       <change beforePath="$PROJECT_DIR$/www/templates/parametrizar_contas.html" afterPath="$PROJECT_DIR$/www/templates/parametrizar_contas.html" />
       <change beforePath="$PROJECT_DIR$/www/views.py" afterPath="$PROJECT_DIR$/www/views.py" />
     </list>
@@ -21,7 +21,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="646">
               <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="13" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -30,23 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/forms.py">
+      <file leaf-file-name="jquery.formset.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/django/jquery.formset.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cadastro_despesa.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/static/js/cadastro_despesa.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+            <state relative-caret-position="-194">
+              <caret line="150" column="45" lean-forward="false" selection-start-line="150" selection-start-column="42" selection-end-line="150" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -62,12 +50,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/urls.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="9" column="99" lean-forward="false" selection-start-line="9" selection-start-column="79" selection-end-line="9" selection-end-column="99" />
-              <folding />
+            <state relative-caret-position="136">
+              <caret line="54" column="72" lean-forward="false" selection-start-line="54" selection-start-column="72" selection-end-line="54" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,21 +65,31 @@
       <file leaf-file-name="parametrizar_contas.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/templates/parametrizar_contas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+            <state relative-caret-position="102">
+              <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cadastro_despesa.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/cadastro_despesa.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="39">
+              <caret line="72" column="8" lean-forward="true" selection-start-line="72" selection-start-column="8" selection-end-line="77" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views.py">
+      <file leaf-file-name="parametrizar_contas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/static/js/parametrizar_contas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="31" column="18" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,18 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>post</find>
-      <find>template</find>
-      <find>alteracao_contas</find>
-      <find>parame</find>
-      <find>alterar_</find>
-      <find>altera</find>
-      <find>cadastro_conta</find>
-      <find>espesa.pendente_cadastro_conta = Falsea</find>
-      <find>alterar</find>
-      <find>parametr</find>
-      <find>param</find>
       <find>cadastro_co</find>
       <find>Despesa</find>
       <find>Despesa(</find>
@@ -133,14 +121,27 @@
       <find>cor</find>
       <find>cadastr</find>
       <find>anual</find>
-      <find>pendente_cadastro_conta</find>
       <find>form</find>
       <find>inici</find>
+      <find>pendente_cadastro_conta</find>
+      <find>refe</find>
+      <find>DATE_FORMAT</find>
+      <find>USE_L10N</find>
+      <find>listar_contas_depesa</find>
+      <find>dropdown</find>
+      <find>id=</find>
+      <find>add</find>
+      <find>remove</find>
+      <find>attr</find>
+      <find>type</find>
+      <find>conta.</find>
+      <find>idden</find>
     </findStrings>
     <replaceStrings>
       <replace>despesa__user=request.user</replace>
       <replace>despesa__usuario=request.user</replace>
       <replace>conta</replace>
+      <replace>contas.empty_form.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -168,17 +169,19 @@
         <option value="$PROJECT_DIR$/autenticacao/templates/cadastro_despesa.html" />
         <option value="$PROJECT_DIR$/autenticacao/templates/login.html" />
         <option value="$PROJECT_DIR$/autenticacao/urls.py" />
-        <option value="$PROJECT_DIR$/Money/settings.py" />
         <option value="$PROJECT_DIR$/autenticacao/views.py" />
         <option value="$PROJECT_DIR$/www/urls.py" />
         <option value="$PROJECT_DIR$/www/tests.py" />
         <option value="$PROJECT_DIR$/www/templates/base.html" />
-        <option value="$PROJECT_DIR$/www/forms.py" />
         <option value="$PROJECT_DIR$/www/static/js/base.js" />
-        <option value="$PROJECT_DIR$/www/views.py" />
         <option value="$PROJECT_DIR$/www/models.py" />
         <option value="$PROJECT_DIR$/www/templates/cadastro_despesa.html" />
         <option value="$PROJECT_DIR$/www/static/js/cadastro_despesa.js" />
+        <option value="$PROJECT_DIR$/www/static/css/parametrizar_contas.css" />
+        <option value="$PROJECT_DIR$/Money/settings.py" />
+        <option value="$PROJECT_DIR$/www/forms.py" />
+        <option value="$PROJECT_DIR$/www/views.py" />
+        <option value="$PROJECT_DIR$/www/static/js/parametrizar_contas.js" />
         <option value="$PROJECT_DIR$/www/templates/parametrizar_contas.html" />
       </list>
     </option>
@@ -216,6 +219,11 @@
             <path>
               <item name="Money" type="b2602c69:ProjectViewProjectNode" />
               <item name="Money" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Money" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Money" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -234,15 +242,15 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="SearchEverywhereHistoryKey" value="model&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/models.py&#10;url&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/urls.py&#10;view&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;f&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;base.j&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/base.js&#10;base&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/base.html&#10;cadas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/cadastro_despesa.html&#10;forms&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;form&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;vi&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;v&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;set&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/Money/settings.py&#10;LOGIN_URL&#9;null&#9;null&#10;b&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/venv/Lib/site-packages/django/core/handlers/base.py&#10;urls&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/autenticacao/urls.py&#10;sett&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/Money/settings.py&#10;lista&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/lista_contas.html&#10;ur&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/urls.py&#10;parametrizar_contas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/parametrizar_contas.html&#10;lista_contas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/listar_contas.js&#10;admin&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;adm&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;ad&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;cad&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/cadastro_despesa.js" />
+    <property name="SearchEverywhereHistoryKey" value="view&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;v&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;f&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;se&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/Money/settings.py&#10;sett&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/Money/settings.py&#10;form&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;base&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/base.html&#10;model&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/models.py&#10;url&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/urls.py&#10;base.j&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/base.js&#10;cadas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/cadastro_despesa.html&#10;forms&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/forms.py&#10;vi&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/views.py&#10;set&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/Money/settings.py&#10;LOGIN_URL&#9;null&#9;null&#10;b&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/venv/Lib/site-packages/django/core/handlers/base.py&#10;urls&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/autenticacao/urls.py&#10;lista&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/lista_contas.html&#10;ur&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/urls.py&#10;parametrizar_contas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/templates/parametrizar_contas.html&#10;lista_contas&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/listar_contas.js&#10;admin&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;adm&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;ad&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/admin.py&#10;cad&#9;FILE&#9;file://C:/Users/Ricardo/PycharmProjects/Money/www/static/js/cadastro_despesa.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ricardo\PycharmProjects\Money\static\django" />
+      <recent name="C:\Users\Ricardo\PycharmProjects\Money\static\jquery" />
+      <recent name="C:\Users\Ricardo\PycharmProjects\Money\www\static\js" />
       <recent name="C:\Users\Ricardo\PycharmProjects\Money\static\semantic" />
       <recent name="C:\Users\Ricardo\PycharmProjects\Money\autenticacao" />
-      <recent name="C:\Users\Ricardo\PycharmProjects\Money\www\templates" />
-      <recent name="C:\Users\Ricardo\PycharmProjects\Money\www\static\js" />
-      <recent name="C:\Users\Ricardo\PycharmProjects\Money\static\jquery" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Ricardo\PycharmProjects\Money\static\bulma\iconpicker" />
@@ -327,14 +335,14 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24925596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4051282" sideWeight="0.5208333" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8683761" sideWeight="0.5208333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.49702382" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.48660713" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32478634" sideWeight="0.48511904" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4051282" sideWeight="0.47916666" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47008547" sideWeight="0.47916666" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -375,7 +383,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="84" />
+      <option name="time" value="87" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -399,42 +407,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/fontawesome/fontawesome-all.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76955">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/static/hero.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/base_old.html" />
-    <entry file="file://$PROJECT_DIR$/www/static/hero.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/jquery/jquery-3.3.1.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="1" column="2235" lean-forward="false" selection-start-line="1" selection-start-column="2235" selection-end-line="1" selection-end-column="2235" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/calendar/bulma-calendar.min.js" />
     <entry file="file://$PROJECT_DIR$/static/calendar/bulma-calendar.js" />
     <entry file="file://$PROJECT_DIR$/static/calendar/picker.js" />
@@ -507,6 +479,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="514" column="8" lean-forward="false" selection-start-line="514" selection-start-column="8" selection-end-line="514" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -522,6 +495,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -536,13 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="502" column="22" lean-forward="false" selection-start-line="502" selection-start-column="14" selection-end-line="502" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Money/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="124" column="32" lean-forward="false" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -677,18 +644,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/static/jquery/jquery-ui.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/static/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -701,19 +660,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/views.py">
+    <entry file="file://$PROJECT_DIR$/www/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="31" column="18" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="18" />
+        <state relative-caret-position="85">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/static/css/parametrizar_contas.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Money/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="108" column="22" lean-forward="false" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jquery/jquery-ui.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/widgets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1982">
+          <caret line="231" column="8" lean-forward="false" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/static/js/cadastro_despesa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="646">
           <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="13" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -721,37 +728,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/static/js/cadastro_despesa.js">
+    <entry file="file://$PROJECT_DIR$/static/django/jquery.formset.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-194">
+          <caret line="150" column="45" lean-forward="false" selection-start-line="150" selection-start-column="42" selection-end-line="150" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/static/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <caret line="54" column="72" lean-forward="false" selection-start-line="54" selection-start-column="72" selection-end-line="54" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/static/js/parametrizar_contas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/cadastro_despesa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+        <state relative-caret-position="39">
+          <caret line="72" column="8" lean-forward="true" selection-start-line="72" selection-start-column="8" selection-end-line="77" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/parametrizar_contas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="102">
+          <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

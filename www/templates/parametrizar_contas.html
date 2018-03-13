@@ -2,47 +2,108 @@
 {% load widget_tweaks %}
 {% block content %}
 {% load staticfiles %}
+<script src="{% static 'django/jquery.formset.js' %}"></script>
+<script src="{% static 'js/parametrizar_contas.js' %}"></script>
+<style>
+    .inline-select {
+        width: 33% !important;
+        display: inline-block !important;
+    }
+    .inline-select-mes-ano {
+        width: 49% !important;
+        display: inline-block !important;
+    }
+
+</style>
+<link rel="stylesheet" href="">
 <div class="ui main text container">
     <h2 class="ui header">Cadastro de Contas</h2>
+    <input type="button" value="Add More" id="add_more">
     {% if form.errors %}
     <div class="ui error message">
         <div class="header">Erro ao cadastrar despesa</div>
         {{form.errors}}
     </div>
     {% endif %}
+    <div id="alerta">
+
+    </div>
     <form action="{% url 'cadastro_conta' despesa_id %}" method="post">
-        <div class="ui form">
+        <div id="forms" class="ui form">
             {% csrf_token %}
             {{ contas.management_form }}
             {% for conta in contas %}
-            <div class="five fields">
-                <div class="field {% if conta.referente.errors %} error {% endif %}">
+            <div class="seven fields">
+                <div class="six wide field {% if conta.referente.errors %} error {% endif %}">
                     <label>{{ conta.referente.label }}</label>
-                    {{ conta.referente|attr:"placeholder:Referente" }}
+                    {{ conta.referente|add_class:"inline-select-mes-ano ui fluid search dropdown" }}
                 </div>
-                <div class="field {% if conta.valor.errors %} error {% endif %}">
+                <div class="four wide field {% if conta.valor.errors %} error {% endif %}">
                     <label>{{ conta.valor.label }}</label>
                     {{ conta.valor|attr:"placeholder:Valor da Conta" }}
                 </div>
-                <div class="field {% if conta.dia_vencimento.errors %} error {% endif %}">
+                <div class="four wide field {% if conta.dia_vencimento.errors %} error {% endif %}">
                     <label>{{ conta.dia_vencimento.label }}</label>
                     {{ conta.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown" }}
                 </div>
                 <div class="two wide field {% if conta.paga.errors %} error {% endif %}">
                     <label>{{ conta.paga.label }}</label>
-                    <div id="box-rep-anual" class="ui toggle fitted checkbox">
+                    <div class="ui toggle fitted checkbox">
                         {{ conta.paga|add_class:"hidden"|attr:"tabindex:0" }}
                         <label></label>
                     </div>
                 </div>
-                <div class="field {% if conta.data_pagamento.errors %} error {% endif %}">
+                <div class="eight wide field {% if conta.data_pagamento.errors %} error {% endif %}">
                     <label>{{ conta.data_pagamento.label }}</label>
-                    {{ conta.data_pagamento|attr:"placeholder:Data de Pagamento"|add_class:"ui fluid search dropdown" }}
+                    {{ conta.data_pagamento|add_class:"inline-select ui fluid search dropdown" }}
+                </div>
+                <div class="field">
+                    {{conta.DELETE|attr:"style:display:none"|add_class:"remover-cb"}}
+                    <label>Remover</label>
+                    <a href="javascript:void(0)" class="ui circular icon red basic button remover">
+                        <i class="icon times"></i>
+                    </a>
                 </div>
             </div>
             {% endfor %}
-            <input type="submit" value="Enviar"/>
         </div>
+        <button type="submit" class="ui positive  button">
+            Salvar
+        </button>
     </form>
+</div>
+<div id="empty_form" style="display:none">
+    <div class="seven fields">
+        <div class="six wide field {% if contas.empty_form.referente.errors %} error {% endif %}">
+            <label>{{ contas.empty_form.referente.label }}</label>
+            {{ contas.empty_form.referente|add_class:"inline-select-mes-ano ui fluid search dropdown" }}
+        </div>
+        <div class="four wide field {% if contas.empty_form.valor.errors %} error {% endif %}">
+            <label>{{ contas.empty_form.valor.label }}</label>
+            {{ contas.empty_form.valor|attr:"placeholder:Valor da Conta" }}
+        </div>
+        <div class="four wide field {% if contas.empty_form.dia_vencimento.errors %} error {% endif %}">
+            <label>{{ contas.empty_form.dia_vencimento.label }}</label>
+            {{ contas.empty_form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown" }}
+        </div>
+        <div class="two wide field {% if contas.empty_form.paga.errors %} error {% endif %}">
+            <label>{{ contas.empty_form.paga.label }}</label>
+            <div class="ui toggle fitted checkbox">
+                {{ contas.empty_form.paga|add_class:"hidden"|attr:"tabindex:0" }}
+                <label></label>
+            </div>
+        </div>
+        <div class="eight wide field {% if contas.empty_form.data_pagamento.errors %} error {% endif %}">
+            <label>{{ contas.empty_form.data_pagamento.label }}</label>
+            {{ contas.empty_form.data_pagamento|add_class:"inline-select ui fluid search dropdown" }}
+        </div>
+        <div class="field">
+            {{contas.empty_form.DELETE|attr:"style:display:none"|add_class:"remover-cb"}}
+            <label>Remover</label>
+            <a href="javascript:void(0)" class="ui circular icon red basic button remover">
+                <i class="icon times"></i>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}

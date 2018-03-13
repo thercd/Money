@@ -36,7 +36,7 @@ def cadastro_conta(request,despesa_id):
         if contas:
             return HttpResponse('A despesa já possui as contas cadastradas')
         else:
-            ContaFormSet = modelformset_factory(Conta, form=ContaForm, extra=12)
+            ContaFormSet = modelformset_factory(Conta, form=ContaForm, max_num=12, can_delete=True)
             if request.method == 'POST':
                 formset = ContaFormSet(request.POST)
                 if formset.is_valid():
@@ -53,6 +53,7 @@ def cadastro_conta(request,despesa_id):
                 for conta in contas:
                     contas_json.append(model_to_dict(conta))
                 formset = ContaFormSet(initial=contas_json, queryset=Conta.objects.none())
+                formset.extra = len(contas)
                 return render(request, 'parametrizar_contas.html', {'contas': formset,'despesa_id': despesa_id})
     except Despesa.DoesNotExist:
         return HttpResponse('Operaçao nao disponivel')
