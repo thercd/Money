@@ -23,14 +23,18 @@ class Despesa(models.Model):
 
     def criar_contas(self, data_referencia):
         MES_ATUAL = 1
-        meses_conta = range(self.mes_inicio, self.mes_termino + MES_ATUAL)
-        data_ultima_conta_ano = data_referencia.replace(month=meses_conta[-1], day=self.dia_vencimento)
-        ano_referencia = data_referencia.year
         contas = []
-        if data_referencia > data_ultima_conta_ano:
-            ano_referencia += 1
-        for mes in meses_conta:
-            conta = self.criar_conta(datetime.date(ano_referencia, mes, self.dia_vencimento))
+        ano_referencia = data_referencia.year
+        if self.periodica:
+            meses_conta = range(self.mes_inicio, self.mes_termino + MES_ATUAL)
+            data_ultima_conta_ano = data_referencia.replace(month=meses_conta[-1], day=self.dia_vencimento)
+            if data_referencia > data_ultima_conta_ano:
+                ano_referencia += 1
+            for mes in meses_conta:
+                conta = self.criar_conta(datetime.date(ano_referencia, mes, self.dia_vencimento))
+                contas.append(conta)
+        else:
+            conta = self.criar_conta(datetime.date(ano_referencia, data_referencia.month, self.dia_vencimento))
             contas.append(conta)
         return contas
 

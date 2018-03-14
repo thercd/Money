@@ -216,6 +216,7 @@ class DespesaTest(TestCase):
         self.assertRedirects(response, reverse('cadastro_conta', args=[1]))
         self.assertTemplateUsed(response, 'parametrizar_contas.html')
 
+
     def test_alterar_despesa_sem_logar_deve_redirecionar_para_login(self):
         # user = User.objects.create_user(username='username', password='password')
         c = Client()
@@ -418,6 +419,23 @@ class ContaTest(TestCase):
         self.assertFalse(any(c.referente == datetime.date(2018, 10, 5) for c in sujeito))
         self.assertFalse(any(c.referente == datetime.date(2018, 11, 5) for c in sujeito))
         self.assertFalse(any(c.referente == datetime.date(2018, 12, 5) for c in sujeito))
+
+    def test_criar_contas_nao_periodica_deve_criar_uma_conta_no_proprio_mes(self):
+        despesa = {}
+        despesa['nome'] = 'Teste'
+        despesa['valor'] = 100
+        despesa['dia_vencimento'] = '5'
+        despesa['cor'] = 'blue'
+        despesa['icone'] = 'fa-times'
+        despesa['categoria'] = 'teste'
+        despesa['periodica'] = False
+        despesa['repeticao_anual'] = False
+        form = DespesaForm(data=despesa)
+        despesa_model = form.save(commit=False)
+        sujeito = despesa_model.criar_contas(datetime.date(2018, 2, 5))
+        self.assertEqual(len(sujeito), 1)
+        self.assertFalse(any(c.referente == datetime.date(2018, 1, 1) for c in sujeito))
+        self.assertTrue(any(c.referente == datetime.date(2018, 2, 5) for c in sujeito))
 
 
     def test_criar_contas_sem_existir_e_logar_deve_dar_erro(self):

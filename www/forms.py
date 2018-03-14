@@ -156,17 +156,17 @@ class DespesaForm(ModelForm):
             if mes_inicio in EMPTY_VALUES:
                 self._errors['mes_inicio'] = self.error_class([
                     'O Mes de inicio é necessario quando a divida é periodica'])
-            elif mes_termino in EMPTY_VALUES:
+            if mes_termino in EMPTY_VALUES:
                 self._errors['mes_termino'] = self.error_class([
                     'O Mes de termino é necessario quando a divida é periodica'])
-            elif mes_inicio > mes_termino:
+            if mes_inicio and mes_termino and mes_inicio > mes_termino:
                 self._errors['mes_inicio'] = self.error_class([
                     'O Mes de inicio deve ser menor que o termino'])
                 self._errors['mes_termino'] = self.error_class([
                     'O Mes de termino deve ser maior que o inicio'])
         else:
-            self.cleaned_data['mes_inicio'] = ''
-            self.cleaned_data['mes_termino'] = ''
+            del self.cleaned_data['mes_inicio']
+            del self.cleaned_data['mes_termino']
         return self.cleaned_data
 
 
@@ -179,6 +179,7 @@ class ContaForm(ModelForm):
                 'paga',
                 'data_pagamento',
                 'observacao']
+        labels = {'dia_vencimento': 'Vencimento'}
 
         widgets = {
             'referente': MonthYearWidget(),

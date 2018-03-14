@@ -43,7 +43,7 @@ def cadastro_conta(request,despesa_id):
                     for contaForm in formset:
                         conta = contaForm.save(commit=False)
                         conta.despesa = despesa
-                        conta.save()
+                    formset.save()
                     return redirect(reverse('contas_cadastradas_sucesso', args=[despesa.id]))
                 else:
                     return render(request, 'parametrizar_contas.html', {'contas': formset, 'despesa_id': despesa_id})
