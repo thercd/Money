@@ -1,0 +1,48 @@
+{% block step %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/step_cadastro_despesa.css' %}">
+<div id="step" class="ui three steps fluid top attached">
+    <div class="step step-1">
+        <i class="credit card icon"></i>
+        <div class="content">
+            <div class="title">Despesa</div>
+            <div class="description">Escolha as quantidade de parcelas, vencimento e demais informaçoes </div>
+        </div>
+    </div>
+    <div class="step step-2">
+        <i class="tags icon"></i>
+        <div class="content">
+            <div class="title">Contas</div>
+            <div class="description">Pagamantos, meses e demais configuracoes</div>
+        </div>
+    </div>
+    <div  class="step step-3">
+        <i class="info circle icon"></i>
+        <div class="content">
+            <div class="title">Informaçoes</div>
+            <div class="description">Resumo das Despesas Cadastradas</div>
+        </div>
+    </div>
+</div>
+
+<div id="step-mobile" class="ui three mini steps unstackable">
+    <div class="step step-1">
+        <i class="credit card icon"></i>
+        <div class="content">
+            <div class="title">Despesa</div>
+        </div>
+    </div>
+    <div class="step step-2">
+        <i class="tags icon"></i>
+        <div class="content">
+            <div class="title">Contas</div>
+        </div>
+    </div>
+    <div class="step step-3">
+        <i class="info circle icon"></i>
+        <div class="content">
+            <div class="title">Resumo</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

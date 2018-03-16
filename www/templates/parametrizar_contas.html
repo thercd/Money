@@ -3,31 +3,9 @@
 {% block content %}
 {% load staticfiles %}
 <script src="{% static 'js/parametrizar_contas.js' %}"></script>
-<style>
-    .inline-select {
-        width: 33% !important;
-        display: inline-block !important;
-    }
-    .inline-select-mes-ano {
-        width: 49% !important;
-        display: inline-block !important;
-    }
-
-</style>
 <div class="ui main container">
-    <div class="ui grid" style="padding-bottom: 20px;">
-        <div class="ten wide column">
-            <h2 class="ui header">Cadastro de Contas</h2>
-        </div>
-        <div class="six wide column">
-            <div class="ui vertical labeled icon buttons">
-                <button type="button" id="add_more" class="ui primary button">
-                    <i class="plus icon"></i>
-                    Adicionar Conta
-                </button>
-            </div>
-        </div>
-    </div>
+    {% include 'step_cadastro_despesa.html' %}
+    <h2 class="ui dividing header ">Cadastro de Contas</h2>
     {% if form.errors %}
     <div class="ui  error  message">
         <div class="header">Erro ao cadastrar despesa</div>
@@ -41,98 +19,43 @@
         <p>A quantidade maxima de contas é <span id="maximo-formularios"></span></p>
     </div>
     <form action="{% url 'cadastro_conta' despesa_id %}" method="post">
-        <div id="forms" class="ui form">
-            {% csrf_token %}
-            {{ contas.management_form }}
+        <table class="ui striped unstackable table">
+            <thead>
+            <tr>
+                <th>Referente</th>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Paga</th>
+                <th>Dt pagamento</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for conta in contas %}
-            <div class="ui grid">
-                <div class="one wide column">
-                    <div class="field">
-                        {{conta.DELETE|attr:"style:display:none"|add_class:"remover-cb"}}
-                        <label>Remover</label>
-                        <a href="javascript:void(0)" class="ui circular icon red basic button remover">
-                            <i class="icon times"></i>
-                        </a>
+            <tr>
+                <td>{{conta.referente.value|date:"M Y"}}</td>
+                <td>{{conta.valor.value}}</td>
+                <td>{{conta.dia_vencimento.value}}</td>
+                <td>
+                    <div class="ui toggle fitted checkbox">
+                        {{ conta.paga|add_class:"hidden"|attr:"tabindex:0" }}
+                        <label></label>
                     </div>
-                </div>
-                <div class="four wide column">
-                    <div class="field {% if conta.referente.errors %} error {% endif %}">
-                        <label>{{ conta.referente.label }}</label>
-                        {{ conta.referente|add_class:"inline-select-mes-ano ui fluid search dropdown" }}
-                    </div>
-                </div>
-                <div class="two wide column">
-                    <div class="field{% if conta.valor.errors %} error {% endif %}">
-                        <label>{{ conta.valor.label }}</label>
-                        {{ conta.valor|attr:"placeholder:Valor da Conta" }}
-                    </div>
-                </div>
-                <div class="two wide column">
-                    <div class="field {% if conta.dia_vencimento.errors %} error {% endif %}">
-                        <label>{{ conta.dia_vencimento.label }}</label>
-                        {{ conta.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown" }}
-                    </div>
-
-                </div>
-                <div class="one wide column">
-                    <div class="field {% if conta.paga.errors %} error {% endif %}">
-                        <label>{{ conta.paga.label }}</label>
-                        <div class="ui toggle fitted checkbox">
-                            {{ conta.paga|add_class:"hidden"|attr:"tabindex:0" }}
-                            <label></label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="five wide column">
-                    <div class="field data-pagamento {% if conta.data_pagamento.errors %} error {% endif %}">
-                        <label>{{ conta.data_pagamento.label }}</label>
-                        {{ conta.data_pagamento|add_class:"inline-select ui fluid search dropdown" }}
-                    </div>
-
-                </div>
-            </div>
-            <div class="ui divider"></div>
+                </td>
+                Falta Terminar Dadta de Paa
+                <td class="data-pa">{{conta.data_pagamento.value|default:""}}</td>
+            </tr>
             {% endfor %}
-        </div>
-        <button type="submit" class="ui positive  button">
+            </tbody>
+        </table>
+        <button type="submit" class="ui positive  button right floated">
+            <i class="save icon"></i>
             Salvar
         </button>
+            {% csrf_token %}
+            {{ contas.management_form }}
+        <div style="display:none">
+            {{ contas }}
+        </div>
     </form>
-</div>
-<div id="empty_form" style="display:none">
-    <div class="seven fields">
-        <div class="six wide field {% if contas.empty_form.referente.errors %} error {% endif %}">
-            <label>{{ contas.empty_form.referente.label }}</label>
-            {{ contas.empty_form.referente|add_class:"inline-select-mes-ano ui fluid search dropdown" }}
-        </div>
-        <div class="four wide field {% if contas.empty_form.valor.errors %} error {% endif %}">
-            <label>{{ contas.empty_form.valor.label }}</label>
-            {{ contas.empty_form.valor|attr:"placeholder:Valor da contas.empty_form" }}
-        </div>
-        <div class="four wide field {% if contas.empty_form.dia_vencimento.errors %} error {% endif %}">
-            <label>{{ contas.empty_form.dia_vencimento.label }}</label>
-            {{ contas.empty_form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search
-            dropdown" }}
-        </div>
-        <div class="two wide field {% if contas.empty_form.paga.errors %} error {% endif %}">
-            <label>{{ contas.empty_form.paga.label }}</label>
-            <div class="ui toggle fitted checkbox">
-                {{ contas.empty_form.paga|add_class:"hidden"|attr:"tabindex:0" }}
-                <label></label>
-            </div>
-        </div>
-        <div class="eight wide field data-pagamento {% if contas.empty_form.data_pagamento.errors %} error {% endif %}">
-            <label>{{ contas.empty_form.data_pagamento.label }}</label>
-            {{ contas.empty_form.data_pagamento|add_class:"inline-select ui fluid search dropdown" }}
-        </div>
-        <div class="field">
-            {{contas.empty_form.DELETE|attr:"style:display:none"|add_class:"remover-cb"}}
-            <label>Remover</label>
-            <a href="javascript:void(0)" class="ui circular icon red basic button remover">
-                <i class="icon times"></i>
-            </a>
-        </div>
-    </div>
 </div>
 {% endblock %}

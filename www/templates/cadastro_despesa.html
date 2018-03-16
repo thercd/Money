@@ -3,37 +3,51 @@
 {% block content %}
 {% load staticfiles %}
 <script src="{% static 'js/cadastro_despesa.js' %}"></script>
-<div class="ui main text container">
-    <h2 class="ui header">Cadastro de Despesa</h2>
+
+<div class="ui main  container">
+    {% include 'step_cadastro_despesa.html' %}
     {% if form.errors %}
-        <div class="ui error message">
-            <div class="header">Erro ao cadastrar despesa</div>
-                {{form.errors}}
-        </div>
+    <div class="ui error message">
+        <div class="header">Erro ao cadastrar despesa</div>
+        {{form.errors}}
+    </div>
     {% endif %}
-    <form action="." method="post" class="ui form">
+    <form action="." method="post" class="ui equal width form">
+
         {% csrf_token %}
-        <h4 class="ui dividing header">Informações da Despesa</h4>
-        <div class="two fields">
+        <h2 class="ui dividing header ">Informações da Despesa</h2>
+        <div class="fields">
             <div class="field required {% if form.nome.errors %} error {% endif %}">
                 <label>{{ form.nome.label }}</label>
                 {{ form.nome|attr:"placeholder:Nome da Despesa" }}
             </div>
-            <div class="field required {% if form.valor.errors %} error {% endif %}">
-                <label>{{ form.valor.label }}</label>
-                {{ form.valor|attr:"placeholder:Valor da Despesa" }}
+            <div class="field required {% if form.estimativa.errors %} error {% endif %} labeled input">
+                <label>{{ form.estimativa.label }}</label>
+                <div class="ui left icon input">
+                    <i class="money bill alternate outline icon"></i>
+                    {{ form.estimativa|attr:"placeholder:Estimativa da Despesa" }}
+                </div>
+
+            </div>
+            <div class="field {% if form.categoria.errors %} error {% endif %}">
+                <label>{{ form.categoria.label }}</label>
+                {{ form.categoria|attr:"placeholder:Categoria" }}
+            </div>
+            <div class="field {% if form.cor.errors %} error {% endif %}">
+                <label>{{ form.cor.label }}</label>
+                {{ form.cor|attr:"placeholder:Cor" }}
             </div>
         </div>
 
         <div class="four fields">
             <div class="field required {% if form.dia_vencimento.errors %} error {% endif %}">
                 <label>{{ form.dia_vencimento.label }}</label>
-                {{ form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown"  }}
+                {{ form.dia_vencimento|attr:"placeholder:Dia do Vencimento"|add_class:"ui fluid search dropdown" }}
             </div>
             <div class="field {% if form.periodica.errors %} error {% endif %} ">
-                <label>Despesa</label>
+                <label>Despesa {{ form.periodica.label }}</label>
                 <div id="div-periodica" class="ui toggle checkbox">
-                    <label for="{{ form.periodica.id_for_label }}">{{ form.periodica.label }}</label>
+                    <label></label>
                     {{ form.periodica|add_class:"hidden"|attr:"tabindex:0" }}
                     </label>
                 </div>
@@ -45,16 +59,6 @@
             <div class="field periodos disabled {% if form.mes_termino.errors %} error {% endif %}">
                 <label>{{ form.mes_termino.label }}</label>
                 {{ form.mes_termino|add_class:"ui fluid search dropdown" }}
-            </div>
-        </div>
-        <div class="two fields">
-            <div class="field {% if form.categoria.errors %} error {% endif %}">
-                <label>{{ form.categoria.label }}</label>
-                {{ form.categoria|attr:"placeholder:Categoria" }}
-            </div>
-            <div class="field {% if form.cor.errors %} error {% endif %}">
-                <label>{{ form.cor.label }}</label>
-                {{ form.cor|attr:"placeholder:Cor" }}
             </div>
         </div>
         <div class="ui segment">
@@ -70,11 +74,10 @@
             <label>{{ form.observacao.label }}</label>
             {{ form.observacao|attr:"placeholder:Observação"|attr:"rows:5" }}
         </div>
-        <button type="reset" class="ui button">
-            Limpar
-        </button>
-        <button type="submit" class="ui positive  button">
+        <button type="submit" class="ui positive  button right floated">
+            <i class="save icon"></i>
             Salvar
         </button>
     </form>
-    {% endblock %}
+</div>
+{% endblock %}

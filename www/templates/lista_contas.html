@@ -2,50 +2,110 @@
 {% block content %}
 {% load staticfiles %}
 <script type="text/javascript" src="{% static 'js/lista_contas.js' %}"></script>
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>valor</th>
-        <th>dia_vencimento</th>
-        <th>referente</th>
-        <th>paga</th>
-        <th>data_pagamento</th>
-        <th>pagar conta</th>
-    </tr>
-    {% for conta in contas %}
-    <tr>
-        <td data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">{{conta.despesa.nome}}</td>
-        <td>{{conta.valor}}</td>
-        <td>{{conta.dia_vencimento}}</td>
-        <td>{{conta.referente}}</td>
-        <td>{{conta.paga}}</td>
-        <td>{{conta.data_pagamento}}</td>
-        <td><input type="button" data-action="{% url 'pagar_conta' conta.despesa.id conta.id %}" class="action" value="pagar" ></td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="ui main container">
+    <h2 class="ui header">Resumo de Contas</h2>
+    <div class="ui piled raised segment">
+        <a class="ui red ribbon label">Contas Vencidas</a>
+        <table class="ui celled table red">
+            <thead>
+            <tr>
+                <th>Despesa</th>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Referente</th>
+                <th>Pagar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--
+                {% for conta in contas %}
+                <tr class="despesa center aligned">
+                    <td>{{conta.valor}}</td>
+                    <td>{{conta.dia_vencimento}}</td>
+                    <td>{{conta.referente|date:"F Y"}}</td>
+                    <td >
+                        {% if conta.paga %}
+                            <i class="large green checkmark icon"></i>
+                        {% else %}
+                            <i class="large red times icon"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{conta.data_pagamento|default:"Pendente Pagamento"}}</td>
+                </tr>
+                {% endfor %}
+                !-->
+            </tbody>
+        </table>
+    </div>
 
-<p>Proximas contas</p>
+    <div class="ui icon positive  floating message">
+        <i class="thumbs up outline icon"></i>
+        <i class="close icon"></i>
+        <div class="content">
+            <div class="header">
+                Nao à contas vencidas!
+            </div>
+        </div>
+    </div>
 
+    <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="first">Contas mes atual</a>
+        <a class="item" data-tab="second">Contas futuras</a>
+        <a class="item" data-tab="third">Contas Antigas</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
 
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>valor</th>
-        <th>dia_vencimento</th>
-        <th>referente</th>
-        <th>paga</th>
-        <th>data_pagamento</th>
-    </tr>
-    {% for conta in proximas_contas %}
-    <tr data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">
-        <td>{{conta.despesa.nome}}</td>
-        <td>{{conta.valor}}</td>
-        <td>{{conta.dia_vencimento}}</td>
-        <td>{{conta.referente}}</td>
-        <td>{{conta.paga}}</td>
-        <td>{{conta.data_pagamento}}</td>
-    </tr>
-    {% endfor %}
-</table>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>valor</th>
+                <th>dia_vencimento</th>
+                <th>referente</th>
+                <th>paga</th>
+                <th>data_pagamento</th>
+                <th>pagar conta</th>
+            </tr>
+            {% for conta in contas %}
+            <tr>
+                <td data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">
+                    {{conta.despesa.nome}}
+                </td>
+                <td>{{conta.valor}}</td>
+                <td>{{conta.dia_vencimento}}</td>
+                <td>{{conta.referente}}</td>
+                <td>{{conta.paga}}</td>
+                <td>{{conta.data_pagamento}}</td>
+                <td><input type="button" data-action="{% url 'pagar_conta' conta.despesa.id conta.id %}" class="action" value="pagar"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>valor</th>
+                <th>dia_vencimento</th>
+                <th>referente</th>
+                <th>paga</th>
+                <th>data_pagamento</th>
+            </tr>
+            {% for conta in proximas_contas %}
+            <tr data-action="{% url 'listar_contas_depesa' conta.despesa.id %}" class="action">
+                <td>{{conta.despesa.nome}}</td>
+                <td>{{conta.valor}}</td>
+                <td>{{conta.dia_vencimento}}</td>
+                <td>{{conta.referente}}</td>
+                <td>{{conta.paga}}</td>
+                <td>{{conta.data_pagamento}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+        Contas Antigas
+    </div>
+</div>
+
 {% endblock %}

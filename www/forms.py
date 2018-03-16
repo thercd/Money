@@ -124,7 +124,7 @@ class DespesaForm(ModelForm):
         )
         model = Despesa
         fields = ['nome',
-            'valor',
+            'estimativa',
             'categoria',
             'dia_vencimento',
             'mes_inicio',

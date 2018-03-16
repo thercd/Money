@@ -8,7 +8,7 @@ dias_vemcimento = [(i, i) for i in range(1, 31)]
 
 class Despesa(models.Model):
     nome = models.CharField(max_length=40)
-    valor = models.DecimalField(max_digits=12, decimal_places=2, validators=[MinValueValidator(0)])
+    estimativa = models.DecimalField(max_digits=12, decimal_places=2, validators=[MinValueValidator(0)])
     dia_vencimento = models.PositiveIntegerField(choices=dias_vemcimento)
     mes_inicio = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(11)])
     mes_termino = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(12)])
@@ -41,7 +41,7 @@ class Despesa(models.Model):
     def criar_conta(self, data_referencia):
         conta = Conta()
         conta.despesa = self
-        conta.valor = self.valor
+        conta.valor = self.estimativa
         conta.dia_vencimento = self.dia_vencimento
         conta.referente = data_referencia
         return conta

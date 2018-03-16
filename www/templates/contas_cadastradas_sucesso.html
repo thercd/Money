@@ -1,26 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load staticfiles %}
-<script type="text/javascript" src="{% static 'js/lista_contas.js' %}"></script>
-
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>valor</th>
-        <th>dia_vencimento</th>
-        <th>referente</th>
-        <th>paga</th>
-        <th>data_pagamento</th>
-    </tr>
-    {% for conta in contas %}
-    <tr data-despesa="{% url 'listar_contas_depesa' conta.despesa.id %}" class="despesa">
-        <td>{{conta.despesa.nome}}</td>
-        <td>{{conta.valor}}</td>
-        <td>{{conta.dia_vencimento}}</td>
-        <td>{{conta.referente}}</td>
-        <td>{{conta.paga}}</td>
-        <td>{{conta.data_pagamento}}</td>
-    </tr>
-    {% endfor %}
-</table>
+<script type="text/javascript" src="{% static 'js/contas_cadastradas_sucesso.js' %}"></script>
+<div class="ui main container">
+    {% include 'step_cadastro_despesa.html' %}
+    <h2 class="ui header">Resumo</h2>
+    <div class="ui icon positive  floating message">
+        <i class="thumbs up outline icon"></i>
+        <div class="content">
+            <div class="header">
+                Parabéns!
+            </div>
+            <p> Suas contas foram cadastradas com sucesso</p>
+            <p> Faltou alguma? ou deseja alterar alguma coisa? e só clicar aqui!</p>
+        </div>
+    </div>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Valor</th>
+            <th>Vencimento</th>
+            <th>Referente</th>
+            <th>Paga</th>
+            <th>Data do Pagamento</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for conta in contas %}
+            <tr class="despesa center aligned">
+                <td>{{conta.valor}}</td>
+                <td>{{conta.dia_vencimento}}</td>
+                <td>{{conta.referente|date:"F Y"}}</td>
+                <td >
+                    {% if conta.paga %}
+                        <i class="large green checkmark icon"></i>
+                    {% else %}
+                        <i class="large red times icon"></i>
+                    {% endif %}
+                </td>
+                <td>{{conta.data_pagamento|default:"Pendente Pagamento"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
