@@ -1,59 +1,48 @@
 $(function(){
-    $('#step-1').addClass('completed');
-    $('#step-2').addClass('active');
-
-    $('.data-pagamento').transition('hide');
-    var maximo_forms = $('#id_form-MAX_NUM_FORMS').val();
-    $('#maximo-formularios').text(maximo_forms);
-    $(document).on( 'click','.remover', function(){
-        var remover_box = $(this).parent().parent().find('.remover-cb')[0]
-        $(remover_box).prop('checked', true);
-        var div_form = $(this).parent().parent().parent();
-        $(div_form).hide();
-        $(div_form).next().hide();
-        if($("#alerta-maximo-formularios").hasClass("visible")){
-            $("#alerta-maximo-formularios").addClass("hidden");
-            $("#alerta-maximo-formularios").removeClass("visible");
-        }
-    } );
-
-    eventoCbox();
-    $('#add_more').click(function() {
-        var quantidade_forms = $('#forms .remover-cb:not(":checked")').length;
-        if (quantidade_forms < maximo_forms){
-            var form_idx = $('#id_form-TOTAL_FORMS').val();
-            $('#forms').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
-            $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-            reloadSemantic();
-        }else{
-            if($("#alerta-maximo-formularios").hasClass("hidden")){
-                $("#alerta-maximo-formularios").removeClass("hidden");
-                $("#alerta-maximo-formularios").addClass("visible");
-            }
-        }
-    });
-})
-
-function reloadSemantic(){
+    var checkbox_pagamento = null;
     $('.ui.dropdown').dropdown();
-    eventoCbox();
-}
-function eventoCbox(){
+    $('.step-1').addClass('completed');
+    $('.step-2').addClass('active');
+
+    $( ".valor-change" ).change(function() {
+        var input = $('#'+$(this).attr('data-valor-id'));
+        input.val($(this).val());
+    });
+
     $('.checkbox').checkbox({
-            onChecked: function () {
-                var cb = $(this);
-                var div_data_pagamento = cb.parent().parent().parent().parent().find('.data-pagamento')[0];
-//                $(div_data_pagamento).transition('hide');
-                $(div_data_pagamento).transition('horizontal flip', '500ms')
-    },
-            onUnchecked: function () {
-                var cb = $(this);
-                var div_data_pagamento = cb.parent().parent().parent().parent().find('.data-pagamento')[0];
-//                $(div_data_pagamento).transition('show');
-                $(div_data_pagamento).transition('horizontal flip', '500ms')
-                $($(div_data_pagamento).find('select')).each(function( index, element ) {
-                    $(this).dropdown('clear');
-                });
-    },
+        onChecked: function () {
+            checkbox_pagamento = $(this).parent();
+            $('.ui.basic.modal')
+                .modal({
+            closable  : false,
+            onDeny    : function(){
+                $(checkbox_pagamento).checkbox('uncheck');
+            },
+            onApprove : function() {
+            var data_pg = $('#data-pagamento');
+                if( data_pg.val() == ""){
+                    alert('Data de pagamento pendente');
+                    return false;
+                }else{
+                    var input_dt = $(checkbox_pagamento).attr('data-dt-paga-id');
+                    $('#'+input_dt).val(data_pg.val());
+                    var cb_id = $(checkbox_pagamento).attr('data-paga-id');
+                    $('#'+cb_id).prop('checked', true);
+                    var dt = new Date(data_pg.val());
+                    $(checkbox_pagamento).parent().next().text(dt.getUTCDate()+'/'+(dt.getUTCMonth()+1)+'/'+dt.getFullYear());
+                    checkbox_pagamento = null;
+                    data_pg.val('');
+                }
+            }
+            }).modal('show');
+        },
+        onUnchecked: function () {
+            var cb = $(this).parent();
+            var input_dt = $(cb).attr('data-dt-paga-id');
+            $('#'+input_dt).val($('#data-pagamento').val());
+            var cb_id = $(cb).attr('data-paga-id');
+            $('#'+cb_id).prop('checked', false);
+            cb.parent().next().text('');
+        },
     })
-}
+})

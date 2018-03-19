@@ -10,5 +10,5 @@ $(function(){
         }
     });
     $('#box-rep-anual').checkbox();
-    $('#step-1').addClass('active');
+    $('.step-1').addClass('active');
 })

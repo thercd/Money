@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.forms.models import model_to_dict
 from django.forms import modelformset_factory
+from django.core import serializers
 from .forms import DespesaForm, ContaForm
 from .models import Despesa, Conta
 import datetime
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+import json
 
 
 def index(request):
@@ -87,6 +89,17 @@ def alteracao_despesa(request, despesa_id):
             return render(request, 'alteracao_despesa.html', {'form': form})
     except Despesa.DoesNotExist:
         return HttpResponse('Operaçao nao disponivel')
+
+@login_required
+def index(request):
+    return render(request, 'lista_contas.html')
+
+
+@login_required
+def listar_contas_vencidas(request):
+    data_atual = datetime.date.today()
+    contas = Conta.objects.filter(despesa__usuario=request.user, referente__lte=data_atual, paga=False, id=3444).order_by('referente').values('id','despesa__nome','referente','valor')
+    return JsonResponse(list(contas), safe=False)
 
 
 @login_required

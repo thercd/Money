@@ -15,14 +15,14 @@
             <p> Faltou alguma? ou deseja alterar alguma coisa? e só clicar aqui!</p>
         </div>
     </div>
-    <table class="ui celled table">
+    <table class="ui celled unstackable table">
         <thead>
         <tr>
             <th>Valor</th>
             <th>Vencimento</th>
             <th>Referente</th>
             <th>Paga</th>
-            <th>Data do Pagamento</th>
+            <th>Pagamento</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
                         <i class="large red times icon"></i>
                     {% endif %}
                 </td>
-                <td>{{conta.data_pagamento|default:"Pendente Pagamento"}}</td>
+                <td>{{conta.data_pagamento|default:"Pendente"}}</td>
             </tr>
             {% endfor %}
         </tbody>

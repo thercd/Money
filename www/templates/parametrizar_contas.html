@@ -2,6 +2,7 @@
 {% load widget_tweaks %}
 {% block content %}
 {% load staticfiles %}
+{% load l10n %}
 <script src="{% static 'js/parametrizar_contas.js' %}"></script>
 <div class="ui main container">
     {% include 'step_cadastro_despesa.html' %}
@@ -19,30 +20,52 @@
         <p>A quantidade maxima de contas é <span id="maximo-formularios"></span></p>
     </div>
     <form action="{% url 'cadastro_conta' despesa_id %}" method="post">
+        <div class="ui basic modal">
+            <div class="ui icon header">
+                <i class="calendar icon"></i>
+                Qual foi a data de pagamento?
+            </div>
+            <div class="content">
+                <div class="ui form five wide field">
+                    <input type="date" id="data-pagamento">
+                </div>
+            </div>
+            <div class="actions" style="margin-left:-1em">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    Cancelar
+                </div>
+                <div class="ui green ok inverted button">
+                    <i class="checkmark icon"></i>
+                    Confirmar
+                </div>
+            </div>
+        </div>
         <table class="ui striped unstackable table">
             <thead>
             <tr>
                 <th>Referente</th>
                 <th>Valor</th>
-                <th>Vencimento</th>
                 <th>Paga</th>
-                <th>Dt pagamento</th>
+                <th>Pagamento</th>
             </tr>
             </thead>
             <tbody>
             {% for conta in contas %}
             <tr>
                 <td>{{conta.referente.value|date:"M Y"}}</td>
-                <td>{{conta.valor.value}}</td>
-                <td>{{conta.dia_vencimento.value}}</td>
+                <td class="ui form five wide field">
+                    <input type="number" class="valor-change" value="{{conta.valor.value|unlocalize}}"
+                           data-valor-id="{{conta.valor.id_for_label}}">
+                </td>
                 <td>
-                    <div class="ui toggle fitted checkbox">
-                        {{ conta.paga|add_class:"hidden"|attr:"tabindex:0" }}
+                    <div class="ui toggle fitted checkbox" data-paga-id="{{conta.paga.id_for_label}}"
+                               data-dt-paga-id="{{conta.data_pagamento.id_for_label}}">
+                        <input type="checkbox">
                         <label></label>
                     </div>
                 </td>
-                Falta Terminar Dadta de Paa
-                <td class="data-pa">{{conta.data_pagamento.value|default:""}}</td>
+                <td>{{conta.data_pagamento.value|default:""}}</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -51,8 +74,8 @@
             <i class="save icon"></i>
             Salvar
         </button>
-            {% csrf_token %}
-            {{ contas.management_form }}
+        {% csrf_token %}
+        {{ contas.management_form }}
         <div style="display:none">
             {{ contas }}
         </div>
